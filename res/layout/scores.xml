@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <RelativeLayout android:layout_width="wrap_content" android:layout_height="50dp" android:layout_gravity="center"
+                    android:id="@+id/relativeLayout" android:layout_marginBottom="10dp">
+        <ImageView android:layout_width="42dp" android:layout_height="wrap_content" android:id="@+id/imageView1"
+                   android:src="@drawable/ursa_feed" android:layout_alignParentLeft="true"
+                   android:layout_alignParentTop="false" android:layout_alignParentEnd="false"
+                   android:layout_alignParentStart="false" android:longClickable="false"
+                   android:layout_alignWithParentIfMissing="false" android:layout_alignParentBottom="false"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/scores"
+                  android:layout_gravity="center" android:textColor="@color/Orange" android:textSize="30dp"
+                  android:layout_alignParentStart="false" android:layout_alignParentEnd="false"
+                  android:layout_alignParentTop="true" android:layout_alignParentLeft="false"
+                  android:layout_alignParentRight="false" android:layout_alignWithParentIfMissing="false"
+                  android:gravity="center_horizontal" android:layout_alignParentBottom="false"
+                  android:layout_centerHorizontal="true" android:singleLine="false"/>
+        <ImageView android:layout_width="43dp" android:layout_height="wrap_content" android:id="@+id/imageView2"
+                   android:src="@drawable/ursa_feed" android:layout_alignParentLeft="false"
+                   android:layout_alignParentTop="false" android:layout_alignParentEnd="false"
+                   android:layout_alignParentStart="false" android:maxHeight="50dp" android:maxWidth="50dp"
+                   android:longClickable="true" android:layout_alignWithParentIfMissing="false"
+                   android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+    <TabHost
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/tabHost" android:layout_gravity="center">
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+            <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+            </TabWidget>
+            <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+                <LinearLayout
+                        android:id="@+id/tab1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+                    <TableLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content" android:layout_gravity="center_horizontal|top"
+                            android:stretchColumns="*" android:id="@+id/tableLayout_allScores">
+                    </TableLayout>
+                </LinearLayout>
+                <LinearLayout
+                        android:id="@+id/tab2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+                    <TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+                                 android:layout_gravity="center_horizontal|top" android:stretchColumns="*"
+                                 android:id="@+id/tableLayout_friendScores">
+                    </TableLayout>
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView" android:layout_gravity="center" android:src="@drawable/ursa_feed"/>
+</LinearLayout>
+

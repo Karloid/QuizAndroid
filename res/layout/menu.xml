@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="center">
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView" android:src="@drawable/zurab" android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false" android:layout_alignParentEnd="false"
+                android:layout_alignParentStart="false" android:layout_alignParentRight="true"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="@string/menu" android:layout_gravity="center"
+                  android:textColor="@color/Orange" android:textSize="30dp" android:layout_alignParentStart="false"
+                  android:layout_alignParentEnd="false" android:layout_alignParentTop="true"
+                  android:layout_alignParentLeft="false" android:layout_alignParentRight="false"
+                  android:layout_alignWithParentIfMissing="false" android:gravity="center_horizontal"
+                  android:layout_alignParentBottom="false" android:layout_centerHorizontal="true"/>
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/imageView2"
+                   android:src="@drawable/zurab" android:layout_alignParentLeft="true"
+                   android:layout_alignParentTop="false" android:layout_alignParentEnd="false"
+                   android:layout_alignParentStart="false"/>
+    </RelativeLayout>
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <ImageView android:layout_width="fill_parent" android:layout_height="fill_parent" android:id="@+id/imageView1"
+                   android:src="@drawable/zurab_high" android:layout_alignParentLeft="true"
+                   android:layout_alignParentTop="false" android:layout_alignParentEnd="false"
+                   android:layout_alignParentStart="false" android:scaleType="centerCrop"
+                />
+        <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listView_menu" android:layout_alignParentTop="false" android:layout_alignParentLeft="false"
+                android:layout_alignTop="@+id/imageView1"
+                android:longClickable="false"/>
+    </RelativeLayout>
+</LinearLayout>
+

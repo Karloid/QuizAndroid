@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Game24Hours</string>
+    <string name="splash">Splash</string>
+    <string name="menu">Menu</string>
+    <string name="help">Help</string>
+    <string name="scores">Scores</string>
+    <string name="settings">Settings</string>
+    <string name="game">Game</string>
+    <string name="appName2">Best game in the world</string>
+    <string name="menu_play">Play</string>
+    <string name="menu_scores">Scores</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_help">HALP</string>
+    <string name="all_scores">All scores</string>
+    <string name="friend_scores">Friend scores</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="middle">Prefer not to say</string><string name="date_status">Date not set</string><string name="status_password">Password not set</string>
+
+
+</resources>

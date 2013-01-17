@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Это фрагмент текстовых XML-данных с результатами игры -->
+<scores>
+    <score
+            username="LED"
+            score="12345"
+            rank="1"/>
+    <score
+            username="SAC"
+            score="12344"
+            rank="2"/>
+    <score
+            username="NAD"
+            score="12339"
+            rank="3"/>
+    <score
+            username="Толян Воронеж "
+            score="1233"
+            rank="4"/>
+    <score
+            username="Noob"
+            score="51"
+            rank="5"/>
+    <score
+            username="Dno"
+            score="12"
+            rank="6"/>
+</scores> 

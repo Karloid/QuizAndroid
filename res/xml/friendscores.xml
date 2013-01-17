@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Это фрагмент текстовых XML-данных с результатами игры -->
+<scores>
+    <score
+            username="Диман"
+            score="12345"
+            rank="1"/>
+    <score
+            username="Васян"
+            score="12344"
+            rank="2"/>
+    <score
+            username="Колян"
+            score="12339"
+            rank="3"/>
+</scores> 

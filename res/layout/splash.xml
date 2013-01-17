@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="@string/splash" android:id="@+id/splash"
+              android:textColor="@color/Orange" android:layout_gravity="center_horizontal" android:gravity="center"
+              android:textSize="55dp" android:textIsSelectable="false"/>
+    <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" android:gravity="fill_horizontal|center_vertical|center_horizontal">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" android:gravity="center_horizontal">
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView1" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"
+                    />
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true"
+                       android:layout_alignParentTop="true"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView12" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView13" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView14" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView15" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView16" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView17" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+                      android:layout_height="wrap_content" android:gravity="center_horizontal"
+                      android:id="@+id/linearLayout">
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView2" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView3" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView4" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView5" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView6" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView7" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView8" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView9" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView10" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView11" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+                      android:layout_height="wrap_content" android:gravity="center_horizontal"
+                      android:id="@+id/linearLayout2">
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView26" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView27" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView28" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView29" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView30" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView31" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView32" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView33" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView34" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView35" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
+                      android:layout_height="wrap_content" android:gravity="center_horizontal"
+                      android:id="@+id/linearLayout1">
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView18" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView19" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView20" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView21" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView22" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView23" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView24" android:layout_column="1" android:src="@drawable/ic_launcher"
+                       android:layout_alignParentLeft="true" android:layout_marginLeft="0dp"
+                       android:layout_alignParentTop="true" android:layout_marginTop="0dp"/>
+            <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                       android:id="@+id/imageView25" android:layout_column="1" android:src="@drawable/earth"
+                       android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+        </LinearLayout>
+    </TableLayout>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/appName2"
+              android:id="@+id/textView" android:textColor="@color/Orange"
+              android:gravity="center" android:textSize="12dp" android:textIsSelectable="false"
+              android:layout_gravity="center_horizontal" android:background="@android:drawable/alert_dark_frame"
+              android:layout_margin="15dp"/>
+</LinearLayout>
+
