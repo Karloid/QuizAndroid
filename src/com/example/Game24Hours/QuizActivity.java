@@ -1,7 +1,6 @@
 package com.example.Game24Hours;
-
+     /*Git test idea */
 import android.app.Activity;
-import android.os.Bundle;
 
 public class QuizActivity extends Activity {
     public static final String GAME_PREFERENCES = "GamePrefs";
