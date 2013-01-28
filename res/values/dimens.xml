@@ -1,3 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<dimen name="tenDp">20px</dimen></resources>
+    <dimen name="tenDp">20px</dimen>
+    <dimen name="game_question_size">20px</dimen>
+</resources>

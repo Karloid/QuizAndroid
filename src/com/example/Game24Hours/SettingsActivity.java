@@ -7,13 +7,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.text.format.Time;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -180,7 +178,7 @@ public class SettingsActivity extends QuizActivity {
                             editor.putString(GAME_PREFERENCES_PASSWORD, strPassword1);
                             editor.commit();
                         } else {
-                            Log.d(DEBUG_TAG, "password do not metch");
+                            Log.d(DEBUG_TAG, "password do not match");
                         }
                         SettingsActivity.this.removeDialog(PASSWORD_DIALOG_ID);
                     }

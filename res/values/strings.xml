@@ -16,7 +16,7 @@
     <string name="friend_scores">Friend scores</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="middle">Prefer not to say</string><string name="date_status">Date not set</string><string name="status_password">Password not set</string>
+    <string name="middle">Prefer not to say</string><string name="date_status">Date not set</string><string name="status_password">Password not set</string><string name="Yes">Yes</string><string name="No">No</string>
 
 
 </resources>

@@ -9,5 +9,5 @@ public class QuizActivity extends Activity {
     public static final String GAME_PREFERENCES_PASSWORD = "Password";
     public static final String GAME_PREFERENCES_DOB = "DOB";
     public static final String GAME_PREFERENCES_GENDER = "Gender";
-    public static final String DEBUG_TAG = "Gender";
+    public static final String DEBUG_TAG = "GAME24DEBUG";
 }
