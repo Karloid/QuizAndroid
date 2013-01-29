@@ -1,8 +1,11 @@
 package com.example.Game24Hours;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -13,41 +16,115 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.*;
+import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Hashtable;
 
-/**
- * Created with IntelliJ IDEA.
- * User: krld
- * Date: 24.12.12
- * Time: 22:21
- * To change this template use File | Settings | File Templates.
- */
 public class GameActivity extends QuizActivity {
+    SharedPreferences prefs;
+    Hashtable<Integer, Question> questions;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
+        prefs = getSharedPreferences(GAME_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(GAME_PREFERENCES_CURRENT_QUESTION);
+        editor.remove(GAME_PREFERENCES_SCORE);
+        editor.commit();
+        loadQuestions();
         final ImageSwitcher questionImageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher_QuestionImage);
         questionImageSwitcher.setFactory(new MyImageSwitcherFactory());
-        questionImageSwitcher.setImageDrawable(getResources().getDrawable(R.drawable.cat_bw));
+        new GetImageFromNetwork().execute(1);
         final TextSwitcher questionTextSwitcher = (TextSwitcher) findViewById(R.id.textSwitcher_QuestionText);
         questionTextSwitcher.setFactory(new MyTextSwitcherFactory());
-        questionTextSwitcher.setCurrentText("First Text Switcher String");
+        questionTextSwitcher.setCurrentText(questions.get(1).text);
+        Animation in = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
+        Animation out = AnimationUtils.loadAnimation(this, android.R.anim.fade_out);
+        questionImageSwitcher.setInAnimation(in);
+        questionImageSwitcher.setOutAnimation(out);
+        questionTextSwitcher.setInAnimation(in);
+        questionTextSwitcher.setOutAnimation(out);
         Button yesButton = (Button) findViewById(R.id.button_Yes);
         yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                questionTextSwitcher.setText("Clicked on Yes Button");
-                new GetImageFromNetwork() {
-                    @Override
-                    public void onPostExecute(Object result) {
-                        questionImageSwitcher.setImageDrawable((Drawable) result);
-                    }
-                }.execute();
-               // questionImageSwitcher.setImageDrawable(getQuestionImageDrawable(0));
+                handleAnswerAndShowNextQuestion(true);
             }
         });
+        Button noButton = (Button) findViewById(R.id.button_No);
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleAnswerAndShowNextQuestion(false);
+            }
+        });
+    }
+
+    private void handleAnswerAndShowNextQuestion(boolean answer) {
+        int curScore = prefs.getInt(GAME_PREFERENCES_SCORE, 0);
+        int nextQuestionNumber = prefs.getInt(GAME_PREFERENCES_CURRENT_QUESTION, 1) + 1;
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(GAME_PREFERENCES_CURRENT_QUESTION, nextQuestionNumber);
+        if (answer) {
+            editor.putInt(GAME_PREFERENCES_SCORE, curScore + 1);
+        }
+        editor.commit();
+        if (!questions.containsKey(nextQuestionNumber)) {
+            loadQuestions();
+        }
+        ;
+        if (questions.containsKey(nextQuestionNumber)) {
+            TextSwitcher questionTextSwitcher = (TextSwitcher) findViewById(R.id.textSwitcher_QuestionText);
+            questionTextSwitcher.setText(questions.get(nextQuestionNumber).text);
+            new GetImageFromNetwork().execute(nextQuestionNumber);
+        } else {
+            handleNoQuestions();
+        }
+    }
+
+    private void handleNoQuestions() {
+            TextSwitcher questionTextSwitcher = (TextSwitcher) findViewById(R.id.textSwitcher_QuestionText);
+        questionTextSwitcher.setText(getResources().getText(R.string.no_questions));
+        ImageSwitcher questionImageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher_QuestionImage);
+        questionImageSwitcher.setImageDrawable(getResources().getDrawable(R.drawable.noquestion));
+        Button yesButton = (Button) findViewById(R.id.button_Yes);
+        yesButton.setEnabled(false);
+        Button noButton = (Button) findViewById(R.id.button_No);
+        noButton.setEnabled(false);
+
+    }
+
+
+    private void loadQuestions() {
+        questions = new Hashtable<Integer, Question>(QUESTION_BATCH_SIZE);
+        XmlResourceParser questionBatch = getResources().getXml(R.xml.samplequestions);
+
+        int eventType = -1;
+        boolean bFoundScores = false;
+        while (eventType != XmlResourceParser.END_DOCUMENT) {
+            if (eventType == XmlResourceParser.START_TAG) {
+                String strName = questionBatch.getName();
+                if (strName.equals("question")) {
+                    Integer questionNumber = new Integer(questionBatch.getAttributeValue(null, XML_TAG_ATTRIBUTE_NUMBER));
+                    String questionText = questionBatch.getAttributeValue(null, XML_TAG_ATTRIBUTE_TEXT);
+                    String questionImageUrl = questionBatch.getAttributeValue(null, XML_TAG_ATTRIBUTE_IMAGEURL);
+                    questions.put(questionNumber, new Question(questionNumber, questionText, questionImageUrl));
+                }
+            }
+            try {
+                eventType = questionBatch.next();
+            } catch (XmlPullParserException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -59,31 +136,10 @@ public class GameActivity extends QuizActivity {
         return true;
     }
 
-    private Drawable getQuestionImageDrawable(int questionNumber) {
-        Drawable image;
-        URL imageUrl;
-        try {
-            imageUrl = new URL(getQuestionImageUrl(questionNumber));
-            Bitmap bitmap = BitmapFactory.decodeStream(imageUrl.openStream());
-            image = new BitmapDrawable(bitmap);
-        } catch (Exception e) {
-            Log.e(DEBUG_TAG, "Decoding bitmap stream failed");
-            e.printStackTrace();
-            image = getResources().getDrawable(R.drawable.noquestion);
-        }
-        return image;
-    }
-
     private String getQuestionImageUrl(int questionNumber) {
         return "http://www.perlgurl.org/Android/BeenThereDoneThat/Questions/q3.png";
     }
 
-    /*    @Override
-        public boolean onOptionsSelected(MenuItem item) {
-            super.onOptionsItemSelected(item);
-            startActivity(item.getIntent());
-            return true;
-        }*/
     public class MyImageSwitcherFactory implements ViewSwitcher.ViewFactory {
         @Override
         public View makeView() {
@@ -105,7 +161,7 @@ public class GameActivity extends QuizActivity {
             int shadowColor = res.getColor(R.color.title_glow);
             textView.setTextSize(dimension);
             textView.setTextColor((int) titleColor);
-            textView.setShadowLayer(10, 5, 5, shadowColor);
+            //  textView.setShadowLayer(10, 5, 5, shadowColor); бажно отображается
             return textView;
         }
     }
@@ -115,9 +171,10 @@ public class GameActivity extends QuizActivity {
         protected Object doInBackground(Object... objects) {
             Drawable image;
             URL imageUrl;
+            //Log.i(DEBUG_TAG, "objects : " + (Integer)objects[0]);
             try {
                 int questionNumber = 1;
-                imageUrl = new URL(getQuestionImageUrl(questionNumber));
+                imageUrl = new URL(questions.get(objects[0]).imageUrl);
                 Bitmap bitmap = BitmapFactory.decodeStream(imageUrl.openStream());
                 image = new BitmapDrawable(bitmap);
             } catch (Exception e) {
@@ -126,6 +183,24 @@ public class GameActivity extends QuizActivity {
                 image = getResources().getDrawable(R.drawable.noquestion);
             }
             return image;
+        }
+
+        @Override
+        public void onPostExecute(Object result) {
+            ImageSwitcher questionImageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher_QuestionImage);
+            questionImageSwitcher.setImageDrawable((Drawable) result);
+        }
+    }
+
+    private class Question {
+        int number;
+        String text;
+        String imageUrl;
+
+        public Question(int questionNumb, String questionText, String questionImageUrl) {
+            number = questionNumb;
+            text = questionText;
+            imageUrl = questionImageUrl;
         }
     }
 }

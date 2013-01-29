@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<questions>
+<question
+number="1"
+text=
+"Have you ever been on an African safari?"
+imageUrl=
+"http://www.perlgurl.org/Android/BeenThereDoneThat/Question
+s/q1.png"
+/>
+<question
+number="2"
+text=
+"Have you ever climbed a mountain?"
+imageUrl=
+"http://www.perlgurl.org/Android/BeenThereDoneThat/Question
+s/q2.png"
+/>
+<question
+number="3"
+text=
+"Have you ever milked a cow?"
+imageUrl=
+"http://www.perlgurl.org/Android/BeenThereDoneThat/Question
+s/q3.png"
+/>
+</questions>

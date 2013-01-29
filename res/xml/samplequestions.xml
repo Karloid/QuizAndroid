@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<questions>
+<question
+number="1"
+text=
+"Have you ever been on an African safari?"
+imageUrl=
+"http://www.cmlt.ru/company/news/2012/12/2012-12-24-rent/headerImage"
+/>
+<question
+number="2"
+text=
+"Have you ever climbed a mountain?"
+imageUrl=
+"http://www.cmlt.ru/company/news/2012/12/2012-12-28-new_year/headerImage"
+/>
+<question
+number="3"
+text=
+"Have you ever milked a cow?"
+imageUrl=
+"http://www.cmlt.ru/img/paladin/main_sign.png"
+/>
+</questions>
