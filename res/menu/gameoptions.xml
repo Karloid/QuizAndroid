@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-   <item android:id="@+id/settings_menu_item"
-         android:title="@string/menu_settings"
-         android:icon="@drawable/zurab"
-         ></item>
+    <item android:id="@+id/settings_menu_item"
+          android:title="@string/menu_settings"
+          android:icon="@drawable/zurab"
+            ></item>
     <item
             android:id="@+id/help_menu_item"
-    android:title="@string/help"
-    android:icon="@android:drawable/ic_menu_help"></item>
+            android:title="@string/help"
+            android:icon="@android:drawable/ic_menu_help"></item>
+    <item
+            android:id="@+id/reset_menu_item"
+            android:title="@string/reset"
+            android:icon="@drawable/zurab"></item>
 </menu>
 
 

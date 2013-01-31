@@ -1,12 +1,17 @@
 package com.example.Game24Hours;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
@@ -17,6 +22,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Calendar;
 
 /**
@@ -27,14 +35,17 @@ import java.util.Calendar;
  * To change this template use File | Settings | File Templates.
  */
 public class SettingsActivity extends QuizActivity {
+    public static final int TAKE_AVATAR_CAMERA_REQUEST = 1;
+    public static final int TAKE_AVATAR_GALLERY_REQUEST = 2;
     static final int DATE_DIALOG_ID = 0;
     static final int PASSWORD_DIALOG_ID = 1;
+    private SharedPreferences prefs;
 
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-        final SharedPreferences prefs = getSharedPreferences(GAME_PREFERENCES, Context.MODE_PRIVATE);
+        prefs = getSharedPreferences(GAME_PREFERENCES, Context.MODE_PRIVATE);
         //   prefs.edit().clear().commit();
         Button pickDate = (Button) findViewById(R.id.button_dob);
         pickDate.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +98,7 @@ public class SettingsActivity extends QuizActivity {
             @Override
             public void onClick(View view) {
                 showDialog(PASSWORD_DIALOG_ID);
-              //  Toast.makeText(SettingsActivity.this, "TODO: Launch create password dialog", Toast.LENGTH_LONG).show();
+                //  Toast.makeText(SettingsActivity.this, "TODO: Launch create password dialog", Toast.LENGTH_LONG).show();
             }
         });
         final Spinner gender = (Spinner) findViewById(R.id.spinner_gender);
@@ -99,13 +110,45 @@ public class SettingsActivity extends QuizActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 prefs.edit().putInt(GAME_PREFERENCES_GENDER, i).commit();
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+        ImageButton avatarButton = (ImageButton) findViewById(R.id.imageButton_Avatar);
+        avatarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: Launch camera and save photo as avatar
+                Toast.makeText(SettingsActivity.this, "Short click", Toast.LENGTH_SHORT).show();
+                Intent pictureIntent = Intent.createChooser(new Intent(MediaStore.ACTION_IMAGE_CAPTURE), "Chose application");
+                startActivityForResult(pictureIntent, TAKE_AVATAR_CAMERA_REQUEST);
+            }
+        });
+        avatarButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                // TODO image picker
+                Toast.makeText(SettingsActivity.this, "Long click", Toast.LENGTH_SHORT).show();
+                Intent pickPhoto = new Intent(Intent.ACTION_PICK);
+                pickPhoto.setType("image/*");
+                pickPhoto = Intent.createChooser(pickPhoto, "Chose application");
+                startActivityForResult(pickPhoto, TAKE_AVATAR_GALLERY_REQUEST);
+                return true;
+            }
+        });
+        Button removeAvatar = (Button) findViewById(R.id.button_RemoveAvatar);
+        removeAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.remove(GAME_PREFERENCES_AVATAR);
+                editor.commit();
+                setAvatar();
+            }
+        });
+        setAvatar();
     }
 
     @Override
@@ -130,8 +173,6 @@ public class SettingsActivity extends QuizActivity {
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putLong(GAME_PREFERENCES_DOB, dtDob);
                         editor.commit();
-
-                        //To change body of implemented methods use File | Settings | File Templates.
                     }
                 }, 0, 0, 0);
                 return dateDialog;
@@ -145,12 +186,11 @@ public class SettingsActivity extends QuizActivity {
                 pwd2.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                        //To change body of implemented methods use File | Settings | File Templates.
                     }
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                        //To change body of implemented methods use File | Settings | File Templates.
+
                     }
 
                     @Override
@@ -192,7 +232,6 @@ public class SettingsActivity extends QuizActivity {
                 });
                 AlertDialog passwordDialog = builder.create();
                 return passwordDialog;
-
         }
 
         return null;
@@ -223,5 +262,62 @@ public class SettingsActivity extends QuizActivity {
                 dateDialog.updateDate(iYear, iMonth, iDay);
                 return;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case TAKE_AVATAR_CAMERA_REQUEST:
+                if (resultCode == Activity.RESULT_CANCELED) {
+                } else if (resultCode == Activity.RESULT_OK) {
+                    Bitmap cameraPic = (Bitmap) data.getExtras().get("data");
+                    saveAvatar(cameraPic);
+
+                    // TODO: HANDLE PHOTO TAKEN
+                }
+                break;
+            case TAKE_AVATAR_GALLERY_REQUEST:
+                if (resultCode == Activity.RESULT_CANCELED) {
+                } else if (resultCode == Activity.RESULT_OK) {
+                    // TODO: HANDLE IMAGE SHOSEN
+                    Uri photoUri = data.getData();
+                    try {
+                        Bitmap galleryPic = MediaStore.Images.Media.getBitmap(getContentResolver(), photoUri);
+                        saveAvatar(galleryPic);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+        }
+    }
+
+    private void saveAvatar(Bitmap avatar) {
+        // TODO: save bitmap and set up avatar
+        String avatarFileName = "current_avatar.jpg";
+        try {
+            avatar.compress(Bitmap.CompressFormat.JPEG, 100, openFileOutput(avatarFileName, MODE_PRIVATE));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Uri imageUri = Uri.fromFile(new File(getFilesDir(), avatarFileName));
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(GAME_PREFERENCES_AVATAR, imageUri.toString());
+        editor.commit();
+        setAvatar();
+    }
+
+    private void setAvatar() {
+
+        Uri avatarUri;
+        ImageButton avatarButton = (ImageButton) findViewById(R.id.imageButton_Avatar);
+        String strUri = prefs.getString(GAME_PREFERENCES_AVATAR, "");
+        if (strUri.isEmpty()) {
+            avatarUri = Uri.parse("android.resource://com.example.Game24Hours/" + R.drawable.avatar);
+        } else {
+            avatarUri = Uri.parse(strUri);
+        }
+        avatarButton.setImageURI(null);
+        avatarButton.setImageURI(avatarUri);
     }
 }

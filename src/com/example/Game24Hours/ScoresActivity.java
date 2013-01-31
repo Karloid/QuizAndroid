@@ -2,9 +2,7 @@ package com.example.Game24Hours;
 
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 import android.widget.TabHost;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.

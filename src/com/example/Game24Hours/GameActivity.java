@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -23,27 +24,25 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 public class GameActivity extends QuizActivity {
     SharedPreferences prefs;
-    Hashtable<Integer, Question> questions;
+    HashMap<Integer, Question> questions;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
         prefs = getSharedPreferences(GAME_PREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.remove(GAME_PREFERENCES_CURRENT_QUESTION);
-        editor.remove(GAME_PREFERENCES_SCORE);
-        editor.commit();
         loadQuestions();
+
+        int currentQuestion = prefs.getInt(GAME_PREFERENCES_CURRENT_QUESTION, 1);
+
         final ImageSwitcher questionImageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher_QuestionImage);
         questionImageSwitcher.setFactory(new MyImageSwitcherFactory());
-        new GetImageFromNetwork().execute(1);
         final TextSwitcher questionTextSwitcher = (TextSwitcher) findViewById(R.id.textSwitcher_QuestionText);
         questionTextSwitcher.setFactory(new MyTextSwitcherFactory());
-        questionTextSwitcher.setCurrentText(questions.get(1).text);
+
         Animation in = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
         Animation out = AnimationUtils.loadAnimation(this, android.R.anim.fade_out);
         questionImageSwitcher.setInAnimation(in);
@@ -64,6 +63,12 @@ public class GameActivity extends QuizActivity {
                 handleAnswerAndShowNextQuestion(false);
             }
         });
+        if (questions.containsKey(currentQuestion)) {
+            new GetImageFromNetwork().execute(currentQuestion);
+            questionTextSwitcher.setCurrentText(questions.get(currentQuestion).text);
+        }  else {
+            handleNoQuestions();
+        }
     }
 
     private void handleAnswerAndShowNextQuestion(boolean answer) {
@@ -89,7 +94,7 @@ public class GameActivity extends QuizActivity {
     }
 
     private void handleNoQuestions() {
-            TextSwitcher questionTextSwitcher = (TextSwitcher) findViewById(R.id.textSwitcher_QuestionText);
+        TextSwitcher questionTextSwitcher = (TextSwitcher) findViewById(R.id.textSwitcher_QuestionText);
         questionTextSwitcher.setText(getResources().getText(R.string.no_questions));
         ImageSwitcher questionImageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher_QuestionImage);
         questionImageSwitcher.setImageDrawable(getResources().getDrawable(R.drawable.noquestion));
@@ -97,16 +102,14 @@ public class GameActivity extends QuizActivity {
         yesButton.setEnabled(false);
         Button noButton = (Button) findViewById(R.id.button_No);
         noButton.setEnabled(false);
-
     }
 
 
     private void loadQuestions() {
-        questions = new Hashtable<Integer, Question>(QUESTION_BATCH_SIZE);
+        questions = new HashMap<Integer, Question>(QUESTION_BATCH_SIZE);
         XmlResourceParser questionBatch = getResources().getXml(R.xml.samplequestions);
 
         int eventType = -1;
-        boolean bFoundScores = false;
         while (eventType != XmlResourceParser.END_DOCUMENT) {
             if (eventType == XmlResourceParser.START_TAG) {
                 String strName = questionBatch.getName();
@@ -134,6 +137,29 @@ public class GameActivity extends QuizActivity {
         menu.findItem(R.id.help_menu_item).setIntent(new Intent(this, HelpActivity.class));
         menu.findItem(R.id.settings_menu_item).setIntent(new Intent(this, SettingsActivity.class));
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.reset_menu_item) {
+            prefs = getSharedPreferences(GAME_PREFERENCES, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.remove(GAME_PREFERENCES_CURRENT_QUESTION);
+            editor.remove(GAME_PREFERENCES_SCORE);
+            editor.commit();
+            ImageSwitcher questionImageSwitcher = (ImageSwitcher) findViewById(R.id.imageSwitcher_QuestionImage);
+            new GetImageFromNetwork().execute(prefs.getInt(GAME_PREFERENCES_CURRENT_QUESTION, 1));
+            final TextSwitcher questionTextSwitcher = (TextSwitcher) findViewById(R.id.textSwitcher_QuestionText);
+            questionTextSwitcher.setCurrentText(questions.get(prefs.getInt(GAME_PREFERENCES_CURRENT_QUESTION, 1)).text);
+            Button yesButton = (Button) findViewById(R.id.button_Yes);
+            Button noButton = (Button) findViewById(R.id.button_No);
+            yesButton.setEnabled(true);
+            noButton.setEnabled(true);
+
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private String getQuestionImageUrl(int questionNumber) {

@@ -18,6 +18,7 @@
     <string name="female">Female</string>
     <string name="middle">Prefer not to say</string><string name="date_status">Date not set</string><string name="status_password">Password not set</string><string name="Yes">Yes</string><string name="No">No</string>
     <string name="no_questions">No questions</string>
+    <string name="reset">Reset progress</string>
 
 
 </resources>

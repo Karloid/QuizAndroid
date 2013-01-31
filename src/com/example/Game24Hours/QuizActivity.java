@@ -11,6 +11,7 @@ public class QuizActivity extends Activity {
     public static final String GAME_PREFERENCES_GENDER = "Gender";
     public static final String GAME_PREFERENCES_SCORE = "Score";
     public static final String GAME_PREFERENCES_CURRENT_QUESTION = "CurQuestion";
+    public static final String GAME_PREFERENCES_AVATAR= "Avatar";
     public static final String DEBUG_TAG = "GAME24DEBUG";
 
     public static final String XML_TAG_QUESTION_BLOCK = "questions";

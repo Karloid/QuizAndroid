@@ -33,16 +33,37 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nickname:"
-                    android:id="@+id/textView"/>
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editText_nickname" android:maxLength="20" android:maxLines="1"
-                    android:inputType="textPersonName"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageButton_Avatar" android:scaleType="fitXY" android:adjustViewBounds="true"
+                        android:maxHeight="200px" android:minHeight="200px" android:minWidth="200px"
+                        android:maxWidth="200px"/>
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="X"
+                        android:id="@+id/button_RemoveAvatar"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nickname:"
+                            android:id="@+id/textView"/>
+                    <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editText_nickname" android:maxLength="20" android:maxLines="1"
+                            android:inputType="textPersonName"/>
+                </LinearLayout>
+            </LinearLayout>
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Email:"
                       android:id="@+id/textView1"/>
             <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"

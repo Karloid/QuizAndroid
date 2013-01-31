@@ -5,20 +5,26 @@ number="1"
 text=
 "Have you ever been on an African safari?"
 imageUrl=
-"http://www.cmlt.ru/company/news/2012/12/2012-12-24-rent/headerImage"
+"http://cs307512.userapi.com/v307512667/5d1/RaNbeBFL504.jpg"
 />
 <question
 number="2"
 text=
 "Have you ever climbed a mountain?"
 imageUrl=
-"http://www.cmlt.ru/company/news/2012/12/2012-12-28-new_year/headerImage"
+"http://cs411317.userapi.com/v411317667/220/RbGty6xUmLg.jpg"
 />
 <question
 number="3"
 text=
 "Have you ever milked a cow?"
 imageUrl=
-"http://www.cmlt.ru/img/paladin/main_sign.png"
+"http://cs11069.userapi.com/u5300667/144149778/z_865f2552.jpg"
+/><question
+number="4"
+text=
+"You are cow?"
+imageUrl=
+"http://cs11493.userapi.com/u5300667/145924840/z_6ff85942.jpg"
 />
 </questions>
